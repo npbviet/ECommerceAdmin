@@ -1,0 +1,39 @@
+.chatPage {
+  background-color: #f1f3f5;
+  padding: 2rem 2rem 0.25rem 2rem;
+}
+.chatPage h1 {
+  color: black;
+  padding-bottom: 1rem;
+}
+.chatPage h3 {
+  color: #a3a3a3;
+  font-size: 18px;
+  padding-bottom: 2rem;
+}
+.chatContainer {
+  display: flex;
+  background-color: white;
+  justify-content: space-between;
+  height: 65vh;
+}
+.chatSideBar {
+  width: 30%;
+  border: 1px solid #a3a3a3;
+}
+.chatSideBar form {
+  padding: 2rem 1rem;
+}
+.chatArea {
+  flex-grow: 1;
+  border: 1px solid #a3a3a3;
+  display: flex;
+  flex-direction: column;
+}
+.chatAreaList {
+  flex-grow: 1;
+  overflow: hidden;
+}
+.chatAreaInput {
+  align-items: flex-end;
+}

@@ -1,0 +1,289 @@
+/* =============================================== CSS MỚI =========================================== */
+.dash-board-container {
+  padding: 10px;
+  height: fit-content;
+}
+
+.top-infor {
+  display: flex;
+  column-gap: 15px;
+  justify-content: space-between;
+  width: 100%;
+  height: 18%;
+}
+
+.top-content {
+  width: 25%;
+  height: fit-content;
+  padding: 10px;
+  border-radius: 8px; /* Góc bo tròn */
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ cho popup */
+}
+
+.top-content > p {
+  margin: 1px;
+}
+
+.container-icon,
+.container-icon > div {
+  display: flex;
+  justify-content: end;
+}
+
+.top-content > p:first-child {
+  color: #a3a3a3;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.top-content > p:nth-child(2) {
+  font-size: 16px;
+  margin-top: 8px;
+  margin-bottom: 6px;
+}
+
+.top-content i {
+  margin: auto;
+  font-size: 15px;
+}
+
+.container-icon > div {
+  height: 26px;
+  width: 26px;
+  border-radius: 5px;
+}
+
+.user-icon {
+  background-color: #f0a1a1;
+}
+
+.user-icon > i {
+  color: #f00;
+}
+
+.cart-icon {
+  background-color: #eaec74;
+}
+
+.cart-icon > i {
+  color: #40a506;
+}
+
+.dollar-icon {
+  background-color: #cce6cc;
+}
+
+.dollar-icon > i {
+  color: #008000;
+}
+
+.wallet-icon {
+  background-color: #e6cce6;
+}
+
+.wallet-icon > i {
+  display: flex;
+  padding: 4px;
+  color: #891389;
+}
+
+.wallet-img {
+  height: 16px;
+  width: 14px;
+}
+
+.product-list {
+  height: fit-content;
+  margin-top: 3%;
+  box-shadow: 3px 3px 12px 0px rgba(0, 0, 0, 0.2); /* Bóng đổ cho popup */
+  padding: 30px 35px 15px 35px;
+}
+
+.page-content {
+  margin-bottom: 30px;
+}
+
+.title-list-products {
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
+}
+
+.search-input {
+  padding-left: 15px;
+  width: 35%;
+  height: 35px;
+  outline: none;
+}
+
+.div-control {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-new-btn {
+  text-decoration: none;
+  padding: 5px 10px;
+  background-color: #0071c2;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.add-new-btn:hover {
+  background-color: #40a506;
+  color: #fff;
+}
+
+/* ==================== CSS For List Product =================== */
+.list-container {
+  margin-top: 50px;
+}
+
+.text-infor {
+  margin: auto;
+  text-align: center;
+  align-content: center;
+  height: 200px;
+  color: #0071c2;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.no-product {
+  color: #f00;
+}
+
+.header {
+  height: 45px;
+  font-size: 13px;
+  border-top: 1px solid #ddd;
+  border-bottom: none;
+
+  font-weight: bold;
+}
+
+.content {
+  border-top: 1px solid #ddd;
+  font-size: 12px;
+  width: inherit;
+  min-height: 60px;
+}
+
+.container-content > div:last-child {
+  border-bottom: 1px solid #ddd;
+}
+
+.header div,
+.content div {
+  border-left: 1px solid #ddd;
+  padding-left: 15px;
+  align-content: center;
+}
+
+.header div:last-child,
+.content div:last-child {
+  border-right: 1px solid #ddd;
+}
+
+.container-content > div:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.container-content > div:hover {
+  background-color: #87aaec;
+  color: #fff;
+}
+
+.content div {
+  min-height: fit-content;
+}
+
+.product-ID {
+  width: 22%;
+}
+
+.product-name {
+  width: 22%;
+}
+
+.price {
+  width: 16%;
+}
+
+.image {
+  width: 12%;
+  padding: 10px;
+}
+
+.product-img {
+  width: 45%;
+  height: auto;
+}
+
+.category {
+  width: 10%;
+}
+
+.edit {
+  width: 18%;
+}
+
+/* Style này dùng chung cho phần status của booking cho "Booked" */
+.status-style {
+  display: block;
+  border-radius: 10%;
+  width: fit-content;
+  text-align: center;
+  align-content: center;
+  padding: 5px;
+}
+
+/* Style này dùng cho "Booked" */
+.Booking {
+  background-color: #f69685;
+}
+
+.Booked {
+  background-color: #f69685;
+}
+
+.Checkin {
+  background-color: #39d139;
+}
+
+.Checkout {
+  background-color: #d3d0f2;
+}
+
+.edit > button {
+  border-radius: 3px;
+  padding: 5px 10px;
+  border: none;
+  outline: none;
+  color: #fff;
+}
+
+.edit > button:hover {
+  background-color: #c200b8;
+  scale: 110%;
+}
+
+.update-btn {
+  background-color: #22ca80;
+  margin-right: 5px;
+}
+
+.delete-btn {
+  background-color: #ff4f70;
+}
+.header,
+.content {
+  display: flex;
+  color: #495057;
+}
+
+.div-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

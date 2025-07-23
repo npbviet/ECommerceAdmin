@@ -1,0 +1,211 @@
+/* =============================================== CSS MỚI =========================================== */
+.dash-board-container {
+  padding: 10px;
+  height: fit-content;
+}
+
+.top-infor {
+  display: flex;
+  column-gap: 2px;
+  justify-content: space-between;
+  width: 100%;
+  height: 18%;
+}
+
+.top-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 33.33%;
+  height: fit-content;
+  padding: 10px 20px;
+  border-radius: 8px; /* Góc bo tròn */
+}
+
+.top-content > p {
+  margin: 1px;
+}
+
+.container-icon {
+  color: #a3a3a3;
+  font-size: 20px;
+}
+
+.container-icon,
+.container-icon > div {
+  display: flex;
+  justify-content: end;
+}
+
+.sub-title {
+  font-size: 12px;
+  color: #a3a3a3;
+}
+
+.top-content i {
+  margin: auto;
+}
+
+.container-icon > div {
+  height: 26px;
+  width: 26px;
+  border-radius: 5px;
+}
+
+.value-container {
+  position: relative;
+  height: 30px;
+  min-height: fit-content;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 3px;
+}
+
+.vnd-unit {
+  position: absolute;
+  font-size: 12px;
+  top: 0px;
+}
+
+.wallet-img {
+  height: 16px;
+  width: 14px;
+}
+
+.list-transaction {
+  height: fit-content;
+  margin-top: 3%;
+  box-shadow: 3px 3px 12px 0px rgba(0, 0, 0, 0.2); /* Bóng đổ cho popup */
+  padding: 30px 35px 15px 35px;
+}
+
+.title-list-orders {
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
+}
+
+/* ==================== CSS For List Orders =================== */
+.text-infor {
+  margin: auto;
+  text-align: center;
+  align-content: center;
+  height: 200px;
+  color: #0071c2;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.no-order {
+  color: #f00;
+}
+
+.header {
+  height: 45px;
+  font-size: 13px;
+  border-top: 1px solid #ddd;
+  border-bottom: none;
+  font-weight: bold;
+}
+
+.content {
+  border-top: 1px solid #ddd;
+  font-size: 12px;
+  width: inherit;
+  height: 40px;
+}
+
+.container-content > div:last-child {
+  border-bottom: 1px solid #ddd;
+}
+
+.header div,
+.content div {
+  border-left: 1px solid #ddd;
+  padding-left: 15px;
+  align-content: center;
+}
+
+.header div:last-child,
+.content div:last-child {
+  border-right: 1px solid #ddd;
+}
+
+.container-content > div:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.container-content > div:hover {
+  background-color: #87aaec;
+  color: #fff;
+}
+
+.content div {
+  min-height: 30px;
+}
+
+.user-ID {
+  width: 20%;
+}
+
+.user-name {
+  width: 16%;
+}
+
+.phone-number {
+  width: 10%;
+}
+
+.address {
+  width: 9%;
+}
+
+.total-amount {
+  width: 10%;
+}
+
+.delivery {
+  width: 13%;
+}
+
+.order-status {
+  width: 12%;
+}
+
+.detail-order {
+  width: 10%;
+}
+
+.view-btn {
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  background-color: #22ca80;
+  color: #fff;
+  text-decoration: none;
+}
+
+.view-btn:hover {
+  scale: 110%;
+  background-color: #dd1ce4;
+}
+
+/* Style này dùng chung cho phần status của booking cho "Booked" */
+.status-style {
+  display: block;
+  border-radius: 10%;
+  width: fit-content;
+  text-align: center;
+  align-content: center;
+  padding: 5px;
+}
+
+.header,
+.content {
+  display: flex;
+  color: #495057;
+}
+.value-container {
+  color: #000;
+}

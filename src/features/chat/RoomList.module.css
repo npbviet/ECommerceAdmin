@@ -1,0 +1,31 @@
+.mailbox {
+  list-style: none;
+  padding: 0;
+  border-bottom: 1px solid #a3a3a3;
+  /* width: 100%; */
+}
+.mailbox button {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #a3a3a3;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+.mailboxContainer h6 {
+  color: #a3a3a3;
+  margin: 0;
+}
+.active {
+  cursor: pointer;
+  background-color: #f1f3f5 !important;
+}
+
+.active:hover {
+  h6 {
+    color: black;
+  }
+  background-color: rgb(92, 92, 253) !important;
+}

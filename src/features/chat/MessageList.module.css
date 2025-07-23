@@ -1,0 +1,58 @@
+.scrollContainer {
+  margin-top: 2rem;
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  scroll-behavior: smooth;
+}
+
+.chatList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: black;
+  padding: 2rem;
+}
+
+.adminMessage {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.clientMessage {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 12px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.messageContent {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.sender {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.messageBox {
+  background-color: #f1f1f1;
+  padding: 8px 12px;
+  border-radius: 12px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.adminMessage .messageBox {
+  background-color: #e6f7ff;
+  text-align: right;
+}

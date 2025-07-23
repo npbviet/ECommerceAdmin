@@ -1,0 +1,122 @@
+/* CSS FOR BANNER */
+.banner {
+  background-color: #ebf1f3;
+  height: 200px;
+  padding: 0px 80px;
+}
+
+.banner h5 {
+  color: #9f9f9f;
+}
+
+.user-infor {
+  text-align: left;
+  padding-left: 50px;
+  font-style: italic;
+  margin-bottom: 60px;
+}
+
+.content-infor {
+  padding-left: 0px;
+  color: #5a6b70;
+  font-size: 15px;
+}
+
+.user-infor > p {
+  font-size: 30px;
+}
+
+.order-list-container {
+  margin-bottom: 80px;
+}
+
+.header {
+  font-size: 13px;
+  font-weight: bold;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #ebf1f3;
+}
+
+.content {
+  font-size: 15px;
+  width: inherit;
+  color: #000;
+}
+
+.content:hover {
+  background-color: #0cbfd6;
+  color: #fff;
+}
+
+.header div,
+.content div {
+  align-content: center;
+  text-align: center;
+  font-style: italic;
+  min-height: 60px;
+}
+
+.productID {
+  width: 22%;
+}
+
+.image {
+  width: 18%;
+  padding: 15px;
+}
+
+.name {
+  width: 36%;
+}
+
+.price {
+  width: 16%;
+}
+
+.detail {
+  width: 8%;
+}
+
+.product-img {
+  width: 50%;
+  height: auto;
+}
+
+.text-infor {
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  align-content: center;
+  margin-bottom: 150px;
+}
+
+.begin-loading {
+  color: #00f;
+}
+
+.no-order {
+  color: #f00;
+}
+
+.instruction {
+  margin: 10px auto 100px auto;
+  text-align: left;
+  width: 90%;
+  height: 250px;
+  align-content: center;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: bold;
+  color: blue;
+}
+
+.instruction-content {
+  color: #f00;
+  font-weight: bold;
+  list-style: inherit;
+}

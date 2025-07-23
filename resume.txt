@@ -1,0 +1,21 @@
+1. api/ – Giao tiếp với server (chứa logic gọi API)
+
+authApi.js: login, checkLogin, getUserRole, getActiveUserInfor
+productApi.js: getAllProducts, getProductById, add/edit/delete
+orderApi.js: getAllOrders, getOrderById
+userApi.js: getAllUsers
+
+Mỗi file sẽ dùng fetchHelpers.js để đơn giản hóa fetch
+
+2. utils/ – Hàm tiện ích
+paginate.js: chứa paginate(array, pageSize, pageNumber)
+fetchHelpers.js: chứa getFetching, postFetching
+
+3. actions/
+formActions.js: chứa các action dùng cho react-router hoặc form submit như loginAction, addNewProductAction
+
+4. loaders/
+routeProtection.js: chứa protectRouterLoader, handlerForLoginRouter
+userLoaders.js: chứa getActiveUserInforLoader
+productLoaders.js: chứa loaderForProducts, loaderForProductById
+dashboardLoader.js: chứa loaderForDashBoard
