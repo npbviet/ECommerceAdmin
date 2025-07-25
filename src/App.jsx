@@ -29,7 +29,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 library.add(fab, fas, far);
 
-const route = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/admin/login",
     element: <Login />,
