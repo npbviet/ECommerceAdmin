@@ -1,4 +1,4 @@
-import { Form, useLoaderData, useNavigate } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import styles from "./NewProduct.module.css";
 import { Fragment, useRef, useState } from "react";
 
@@ -7,11 +7,12 @@ import { postAddNewProduct } from "../../api/productApi";
 
 export default function NewProduct() {
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [isErrorValidate, setIsErrorValidate] = useState(false);
+  const [shortDescLength, setShortDescLength] = useState(0);
+  const [longDescLength, setLongDescLength] = useState(0);
   const [errorMessage, setErrorMessage] = useState(null);
+
   const navigate = useNavigate();
 
-  // Define refs for input
   const nameRef = useRef();
   const categoryRef = useRef();
   const priceRef = useRef();
@@ -19,84 +20,52 @@ export default function NewProduct() {
   const longDescRef = useRef();
   const fileRef = useRef();
 
-  // This function to handle "onChange()" event of "file upload" input
   const selectFileOnChangeHandler = (event) => {
-    // Get list of selected files
     const files = Array.from(event.target.files);
-    // const files = fileRef.current.value;
-
-    // If selected files are great than 5 files then show notification
     if (files.length > 5) {
       alert("The maximum of files selected is 5 files!");
-      fileRef.current.value = []; // Reset file upload input
-      setSelectedFiles([]); // Reset "selectedFiles" state
+      fileRef.current.value = "";
+      setSelectedFiles([]);
     } else {
-      // Store "files" to "seletedFiles" state
       setSelectedFiles(files);
     }
   };
 
-  // This function to handle "onChange()" event of "Price" input
-  function onChangePriceInputHandler(e) {
-    const priceValue = e.target.value;
-    if (priceValue === "0" || priceValue === "-") {
+  const onChangePriceInputHandler = (e) => {
+    if (e.target.value === "0" || e.target.value === "-") {
       e.target.value = null;
     }
-  }
+  };
 
-  // This function to handle "onBlur()" event of "Price" input
-  function onKeyDownPriceInputHandler(e) {
-    if (e.key === "-") {
-      // Prevent to press minus key: "-"
-      e.preventDefault();
-    }
-  }
+  const onKeyDownPriceInputHandler = (e) => {
+    if (e.key === "-") e.preventDefault();
+  };
 
-  // This function to validate input value of form
-  function validateInputForm(refInput, messageText) {
+  const validateInputForm = (refInput, messageText) => {
     if (refInput.current.value.trim() === "") {
       alert(messageText);
-      return "stop";
+      return false;
     }
-  }
+    return true;
+  };
 
-  // This function to handle onclick event of "Send" button
-  async function onClickSubmitHandler() {
-    // Define an input array
-    const valueInputArr = [
-      {
-        valueInput: nameRef,
-        messageText: 'Enter value for "Product Name" input',
-      },
-      {
-        valueInput: categoryRef,
-        messageText: 'Enter value for "Category" input',
-      },
-      {
-        valueInput: priceRef,
-        messageText: 'Enter value for "Price" input',
-      },
-      {
-        valueInput: shortDescRef,
-        messageText: 'Enter value for "Short Description" input',
-      },
-      {
-        valueInput: longDescRef,
-        messageText: 'Enter value for "Long Description" input',
-      },
-      {
-        valueInput: fileRef,
-        messageText: "Select image file for upload file input",
-      },
+  const handleTextChange = (ref, setLength) => {
+    const value = ref.current.value || "";
+    setLength(value.length);
+  };
+
+  const onClickSubmitHandler = async () => {
+    const inputsToValidate = [
+      { ref: nameRef, msg: 'Enter value for "Product Name"' },
+      { ref: categoryRef, msg: 'Enter value for "Category"' },
+      { ref: priceRef, msg: 'Enter value for "Price"' },
+      { ref: shortDescRef, msg: 'Enter value for "Short Description"' },
+      { ref: longDescRef, msg: 'Enter value for "Long Description"' },
+      { ref: fileRef, msg: "Select image file to upload" },
     ];
 
-    // Validate for other inputs
-    for (let i = 0; i < valueInputArr.length; i++) {
-      const validateResult = validateInputForm(
-        valueInputArr[i].valueInput,
-        valueInputArr[i].messageText
-      );
-      if (validateResult === "stop") return;
+    for (const input of inputsToValidate) {
+      if (!validateInputForm(input.ref, input.msg)) return;
     }
 
     const productData = {
@@ -108,51 +77,34 @@ export default function NewProduct() {
       images: selectedFiles,
     };
 
-    // Add new hotel to database
     const isLoggedIn = await checkLogin();
-    if (isLoggedIn) {
-      const resData = await postAddNewProduct(productData);
-      if (resData.isErrorValidate) {
-        setIsErrorValidate(true);
-        setErrorMessage(resData.message);
-      } else {
-        setIsErrorValidate(false);
-        alert("Add new product is successful!");
-        navigate("/products");
-      }
+    if (!isLoggedIn) return navigate("/admin/login");
+
+    const resData = await postAddNewProduct(productData);
+    if (resData.isErrorValidate) {
+      setErrorMessage(resData.message);
     } else {
-      navigate("/admin/login");
+      alert("Add new product is successful!");
+      navigate("/products");
     }
-  }
+  };
 
   return (
     <Fragment>
-      {/* Page Title */}
       <div className={styles["page-title"]}>Add New Product</div>
 
-      {/* Add New Product Form */}
       <Form encType="multipart/form-data">
         <div className={styles["div-form"]}>
           {/* Product Name */}
           <div className={styles["div-input"]}>
             <label>Product Name</label>
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter Product Name"
-              ref={nameRef}
-            />
+            <input type="text" placeholder="Enter Product Name" ref={nameRef} />
           </div>
 
           {/* Category */}
           <div className={styles["div-input"]}>
             <label>Category</label>
-            <input
-              type="text"
-              name="category"
-              placeholder="Enter Category"
-              ref={categoryRef}
-            />
+            <input type="text" placeholder="Enter Category" ref={categoryRef} />
           </div>
 
           {/* Price */}
@@ -160,7 +112,6 @@ export default function NewProduct() {
             <label>Price</label>
             <input
               type="number"
-              name="price"
               min={1}
               placeholder="Enter Price"
               ref={priceRef}
@@ -174,10 +125,13 @@ export default function NewProduct() {
             <label>Short Description</label>
             <textarea
               className={styles["short-desc"]}
-              name="short_desc"
               placeholder="Enter Short Description"
               ref={shortDescRef}
+              onChange={() =>
+                handleTextChange(shortDescRef, setShortDescLength)
+              }
             />
+            <span>{shortDescLength}/500</span>
           </div>
 
           {/* Long Description */}
@@ -185,28 +139,28 @@ export default function NewProduct() {
             <label>Long Description</label>
             <textarea
               className={styles["long-desc"]}
-              name="long_desc"
               placeholder="Enter Long Description"
               ref={longDescRef}
+              onChange={() => handleTextChange(longDescRef, setLongDescLength)}
             />
+            <span>{longDescLength}/2000</span>
           </div>
 
-          {/* File Upload */}
+          {/* Upload Image */}
           <div className={styles["div-input"]}>
             <label>Upload Image (5 images)</label>
             <input
               className={styles["upload-file"]}
               type="file"
-              name="fileUpload"
-              ref={fileRef}
-              multiple
               accept="image/*"
+              multiple
+              ref={fileRef}
               onChange={selectFileOnChangeHandler}
             />
           </div>
 
+          {/* Submit */}
           <div className={styles["submit-div"]}>
-            {/* Submit Button */}
             <button
               className={styles["submit-btn"]}
               type="button"
@@ -215,7 +169,6 @@ export default function NewProduct() {
               Submit
             </button>
 
-            {/* Error Message */}
             {errorMessage && (
               <span className={styles["error-message"]}>{errorMessage}</span>
             )}

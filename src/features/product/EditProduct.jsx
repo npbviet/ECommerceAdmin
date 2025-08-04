@@ -6,18 +6,30 @@ import { postEditProduct } from "../../api/productApi";
 
 export default function EditProduct() {
   const productInfor = useLoaderData();
-  const [isErrorValidate, setIsErrorValidate] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
 
-  // Define refs for input
   const nameRef = useRef();
   const categoryRef = useRef();
   const priceRef = useRef();
   const shortDescRef = useRef();
   const longDescRef = useRef();
 
-  // This function to handle "onChange()" event of "Price" input
+  const [shortDescLength, setShortDescLength] = useState(0);
+  const [longDescLength, setLongDescLength] = useState(0);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  useEffect(() => {
+    if (productInfor) {
+      nameRef.current.value = productInfor.name;
+      categoryRef.current.value = productInfor.category;
+      priceRef.current.value = productInfor.price;
+      shortDescRef.current.value = productInfor.short_desc;
+      longDescRef.current.value = productInfor.long_desc;
+      setShortDescLength(productInfor.short_desc.length);
+      setLongDescLength(productInfor.long_desc.length);
+    }
+  }, [productInfor]);
+
   function onChangePriceInputHandler(e) {
     const priceValue = e.target.value;
     if (priceValue === "0" || priceValue === "-") {
@@ -25,55 +37,34 @@ export default function EditProduct() {
     }
   }
 
-  // This function to handle "onBlur()" event of "Price" input
   function onKeyDownPriceInputHandler(e) {
-    if (e.key === "-") {
-      // Prevent to press minus key: "-"
-      e.preventDefault();
-    }
+    if (e.key === "-") e.preventDefault();
   }
 
-  // This function to validate input value of form
+  function handleBlurLength(ref, setLength) {
+    const value = ref.current?.value || "";
+    setLength(value.length);
+  }
+
   function validateInputForm(refInput, messageText) {
-    if (refInput.current.value.trim() === "") {
+    if (!refInput.current.value.trim()) {
       alert(messageText);
-      return "stop";
+      return false;
     }
+    return true;
   }
 
-  // This function to handle onclick event of "Send" button
   async function onClickSubmitHandler() {
-    // Define an input array
-    const valueInputArr = [
-      {
-        valueInput: nameRef,
-        messageText: 'Enter value for "Product Name" input',
-      },
-      {
-        valueInput: categoryRef,
-        messageText: 'Enter value for "Category" input',
-      },
-      {
-        valueInput: priceRef,
-        messageText: 'Enter value for "Price" input',
-      },
-      {
-        valueInput: shortDescRef,
-        messageText: 'Enter value for "Short Description" input',
-      },
-      {
-        valueInput: longDescRef,
-        messageText: 'Enter value for "Long Description" input',
-      },
+    const inputFields = [
+      { ref: nameRef, msg: 'Enter value for "Product Name"' },
+      { ref: categoryRef, msg: 'Enter value for "Category"' },
+      { ref: priceRef, msg: 'Enter value for "Price"' },
+      { ref: shortDescRef, msg: 'Enter value for "Short Description"' },
+      { ref: longDescRef, msg: 'Enter value for "Long Description"' },
     ];
 
-    // Validate for other inputs
-    for (let i = 0; i < valueInputArr.length; i++) {
-      const validateResult = validateInputForm(
-        valueInputArr[i].valueInput,
-        valueInputArr[i].messageText
-      );
-      if (validateResult === "stop") return;
+    for (let field of inputFields) {
+      if (!validateInputForm(field.ref, field.msg)) return;
     }
 
     const productData = {
@@ -85,40 +76,23 @@ export default function EditProduct() {
       long_desc: longDescRef.current.value,
     };
 
-    // Add new hotel to database
     const isLoggedIn = await checkLogin();
-    if (isLoggedIn) {
-      const resData = await postEditProduct(productData);
-      if (resData.isErrorValidate) {
-        setIsErrorValidate(true);
-        setErrorMessage(resData.message);
-      } else {
-        setIsErrorValidate(false);
-        alert("Edit product is successful!");
-        navigate("/products");
-      }
+    if (!isLoggedIn) return navigate("/admin/login");
+
+    const resData = await postEditProduct(productData);
+
+    if (resData.isErrorValidate) {
+      setErrorMessage(resData.message);
     } else {
-      navigate("/admin/login");
+      alert("Edit product is successful!");
+      navigate("/products");
     }
   }
 
-  // This "useEffect()" hook to fill up value for edit form
-  useEffect(() => {
-    if (productInfor) {
-      nameRef.current.value = productInfor.name;
-      categoryRef.current.value = productInfor.category;
-      priceRef.current.value = productInfor.price;
-      shortDescRef.current.value = productInfor.short_desc;
-      longDescRef.current.value = productInfor.long_desc;
-    }
-  }, []);
-
   return (
     <Fragment>
-      {/* Page Title */}
       <div className={styles["page-title"]}>Edit Product</div>
 
-      {/* Add New Product Form */}
       <Form encType="multipart/form-data">
         <div className={styles["div-form"]}>
           {/* Product Name */}
@@ -165,7 +139,9 @@ export default function EditProduct() {
               name="short_desc"
               placeholder="Enter Short Description"
               ref={shortDescRef}
+              onBlur={() => handleBlurLength(shortDescRef, setShortDescLength)}
             />
+            <span>{shortDescLength}/500</span>
           </div>
 
           {/* Long Description */}
@@ -176,11 +152,13 @@ export default function EditProduct() {
               name="long_desc"
               placeholder="Enter Long Description"
               ref={longDescRef}
+              onBlur={() => handleBlurLength(longDescRef, setLongDescLength)}
             />
+            <span>{longDescLength}/2000</span>
           </div>
 
+          {/* Submit */}
           <div className={styles["submit-div"]}>
-            {/* Submit Button */}
             <button
               className={styles["submit-btn"]}
               type="button"
@@ -189,7 +167,6 @@ export default function EditProduct() {
               Submit
             </button>
 
-            {/* Error Message */}
             {errorMessage && (
               <span className={styles["error-message"]}>{errorMessage}</span>
             )}
